@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+<title>Home Page</title>
+</head>
+<body style="background-color: bisque;">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Amazon</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About us</a>
+            </li>
+          <li class=" nav-item return">
+            <a class="nav-link" href="#">Returns & Orders</a>
+          </li>
+          <li class=" nav-item login">
+            <a class="nav-link" href="#">Login/Signup</a>
+          </li>
+</ul>
+<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2 search"  type="search" placeholder="Search" aria-label="Search">
+  <button class="button" type="submit" ><span class="fa fa-search fa-lg"></span></button>
+
+          <a class="navbar-brand" href="#">
+            <img src="https://p.kindpng.com/picc/s/714-7147174_png-file-svg-transparent-background-shopping-cart-icon.png" width="30" height="30" class="d-inline-block align-top" alt="cart">
+          </a>
+        </div>
+      </nav>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Today's Deals</a>
+        <a href="#">Accessories</a>
+        <a href="#">Gadgets</a>
+        <a href="#">New Realses</a>
+        <a href="#">Coupons</a>
+      </div>
+      <div id="main">
+        <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;</span>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item ">
+            <a class="nav-link second" href="#">Today's Deals</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link second" href="#">Accessories</a>
+          </li>
+        <li class=" nav-item">
+          <a class="nav-link second" href="#">Gadgets</a>
+        </li>
+        <li class=" nav-item">
+          <a class="nav-link second" href="#">New Realses</a>
+        </li>
+        <li class=" nav-item">
+          <a class="nav-link second" href="#">Coupon</a>
+        </li>
+</ul>
+    </nav>
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100 offer" src="https://images-eu.ssl-images-amazon.com/images/G/31/img17/Home/LA/LATV/1071374_750x200_8._V515060851_.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100 offer" src="https://images-eu.ssl-images-amazon.com/images/G/31/img17/Home/LA/LATV/1071374_750x200_8._V515060851_.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item ">
+          <img class="d-block w-100 offer" src="https://images-eu.ssl-images-amazon.com/images/G/31/img17/Home/LA/LATV/1071374_750x200_8._V515060851_.jpg" alt="Third slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
