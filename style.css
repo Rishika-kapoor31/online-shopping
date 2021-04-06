@@ -1,4 +1,13 @@
-.nav-link{
+@import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;400;500&family=PT+Sans+Narrow:wght@400;700&display=swap');
+input[type=text] {
+	width: 50%;
+	-webkit-transition: width 0.15s ease-in;
+	transition: width 0.15s ease-in;
+}
+input[type=text]:focus {
+	width: 80%;
+}
+.nav-link {
     color: white;
     text-decoration: none;
 }
@@ -8,6 +17,29 @@
     height: 40px;
     width: 40px;
     border-radius: 4px;
+}
+
+.b1{
+    background-color:rgb(114, 121, 146);
+    
+}
+@media screen and (max-width: 670px) {
+    .initial {
+      width: 100%;
+      display: block;
+      margin-bottom: 10px;
+    }
+  }
+.card-body{
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: small;
+}
+.links:hover{
+  color: green;
+ text-decoration: none;
+}
+.heading:hover{
+color: red;
 }
 .column {
     float: left;
@@ -42,10 +74,26 @@
     padding: 16px;
     text-align: center;
     background-color: #f1f1f1;
+  
+  }
+  .first{
+    height: 100px;
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: black solid 1px;
+  }
+  .modules a :hover{
+    text-decoration: none;
   }
 .card{
-    height:200px;
+
+    height:300px;
     width: 200px;
+}
+.items{
+  height: 100px;
+  width: 100px;
 }
 @media (min-width: 600px) {
     /* show 3 items */
@@ -114,11 +162,14 @@ body {
     transition: background-color .5s;
     
   }
-  .second{
+  .second a :hover{
       text-decoration: none;
       color: white;
-      font-weight: 100;
   }
+  .second a{
+    text-decoration: none;
+    color: white;
+}
 .search{
     width: 100px;
 }
@@ -194,4 +245,31 @@ height: 300px;
         width: 100px;
     }
 
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  text-align: center;
+  height: 300px;
+  margin-top: 20px;
+}
+
+.flex-item-left {
+  background-color:rgb(2, 2, 56);
+  padding: 10px;
+  flex: 50%;
+}
+
+.flex-item-right {
+  background-color:rgb(2, 2, 56);
+  padding: 10px;
+  flex: 50%;
+}
+
+/* Responsive layout - makes a one column-layout instead of two-column layout */
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
 }
