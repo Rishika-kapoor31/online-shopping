@@ -3,8 +3,8 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username =$email= $password = $confirm_password = "";
+$username_err =$email_err= $password_err = $confirm_password_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -41,6 +41,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_close($stmt);
         }
     }
+    if(empty(trim($_POST["email"]))){
+        $email_err = "Please enter a email.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE email = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+            
+            // Set parameters
+            $param_email = trim($_POST["email"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $email_err = "This email is already taken.";
+                } else{
+                    $email = trim($_POST["email"]);
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
     
     // Validate password
     if(empty(trim($_POST["password"]))){
@@ -62,17 +93,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $sql = "INSERT INTO users (username,email,password) VALUES (?, ?,?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sss", $param_username,$param_email, $param_password);
             
             // Set parameters
             $param_username = $username;
+            $param_email=$email;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             
             // Attempt to execute the prepared statement
@@ -100,88 +132,90 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> <title></title>
     <style type="text/css">
-        .message{
-          display: none;
-          background: #deedd3;
-          color: #000;
-          position: relative;
-          padding: 20px;
-          margin-top: 10px;
-          width: 100%;
-          margin: auto;
-        }
+        #message {
+    display: none;
+  background: #deedd3;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+  width: 100%;
+  margin: auto;
+}
 
-        .message p {
-          padding: 10px 35px;
-          font-size: 18px;
-        }
+#message p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
 
-        .valid {
-          color: green;
-        }
+.valid {
+  color: green;
+}
 
-        .valid:before {
-          position: relative;
-          left: -35px;
-          content: "✔";
-        }
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
 
 /* Add a red text color and an "x" when the requirements are wrong */
-        .invalid {
-          color: red;
-        }
+.invalid {
+  color: red;
+}
 
-        .invalid:before {
-          position: relative;
-          left: -35px;
-          content: "✖";
-        }
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
 
-        body{
-          font-size: 20px;
-          font-family: Century Gothic;
-          padding: auto;
-          margin-top: 110px;
-          background-color: #ccffbd;
-          background-image: url('bg.jpg');
-          background-size: 1400px 680px;
-          opacity: 120%;
-        }
-        .container{
-          /*max-width: 500px;
-          padding: 14px 14px 14px 14px;
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
-          align-self: center;
-          background-color:#E2C073;
-          border-radius: 15px;
-          align-self: left;
-          opacity: 80%;
-          margin-top: -40px;*/
-          width: 350px;
-          margin: 2% auto;
-          border-radius: 25px;
-          background-color:#ffd3b4;
-          background-color: rgb(0,0,0,0.1);
-          box-shadow: 0 0 17px #333;
-        }
+        body
+{
+    font-size: 20px;
+    font-family: 'Arial';
+    padding:auto;
+    background-image: url('bg.jpg');
+     background-size: 1400px 680px;
+    opacity: 120%;
+}
+        .container
+{
+  max-width: 500px;
+    padding: 14px 14px 14px 14px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
+    align-self: center;
+    background-color:#E2C073;
+    border-radius: 15px;
+    align-self: left;
+    opacity: 80%;
+    margin-top: -40px;
 
-        a{
-          color: blue;
-        }
+
+a
+{
+    color: #7cc278;
+}
 
     </style>
 
 </head>
 <body>
+<br>
+<h1 class="text-center text-success"> FtoU </h1><br>
    
     <div class="container">
-        <h2 class ="text-center card-header"><b>Sign Up</b></h2>
+        <h2 class ="text-center card-header"><u>Sign Up</u></h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
+            </div>  
+            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                <label>Email id</label>
+                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                <span class="help-block"><?php echo $email_err; ?></span>
+            </div>  
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control" id="password" value="<?php echo $password; ?>">
@@ -192,7 +226,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="password" name="confirm_password" class="form-control"  id='confirmPassword'value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
-             <div class="message">
+             <div id="message">
               <h3>Password must contain the following:</h3>
               <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
               <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
